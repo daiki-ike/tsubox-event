@@ -1,26 +1,26 @@
 <!doctype html>
 <html lang="ja">
   <head>
-    <!-- OGP: Facebook等のリンクプレビュー改善（必要に応じてURLを変更） -->
+    <!-- OGP: Facebook等�Eリンクプレビュー改喁E��忁E��に応じてURLを変更�E�E-->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ja_JP" />
-    <meta property="og:site_name" content="有限会社ツーボックス" />
-    <meta property="og:title" content="有限会社ツーボックス｜社内イベント 10/15–10/31" />
-    <meta property="og:description" content="社内Facebookイベントの特設サイト。開催要項とカウントダウンを掲載しています。" />
-    <!-- 公開URL（Netlify等）に合わせて差し替えてください -->
-    <meta property="og:url" content="https://willowy-palmier-89044d.netlify.app/" />
-    <!-- 推奨 1200×630 の画像。暫定でロゴを指定 -->
-    <meta property="og:image" content="https://willowy-palmier-89044d.netlify.app/assets/logo.png" />
-    <meta property="og:image:alt" content="有限会社ツーボックス 社内イベント" />
-    <!-- Twitterカード（任意。Facebookには影響しません） -->
+    <meta property="og:site_name" content="有限会社チE�Eボックス" />
+    <meta property="og:title" content="有限会社チE�Eボックス�E�社冁E��ベンチE10/15 E0/31" />
+    <meta property="og:description" content="社冁Eacebookイベント�E特設サイト。開催要E��E��カウントダウンを掲載してぁE��す、E />
+    <!-- 公開URL�E�Eetlify等）に合わせて差し替えてください -->
+    <meta property="og:url" content="https://spiffy-longma-51e336.netlify.app/" />
+    <!-- 推奨 1200ÁE30 の画像。暫定でロゴを指宁E-->
+    <meta property="og:image" content="https://spiffy-longma-51e336.netlify.app/assets/logo.png" />
+    <meta property="og:image:alt" content="有限会社チE�Eボックス 社冁E��ベンチE />
+    <!-- Twitterカード（任意、Eacebookには影響しません�E�E-->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="有限会社ツーボックス｜社内イベント 10/15–10/31" />
-    <meta name="twitter:description" content="社内Facebookイベントの特設サイト。開催要項とカウントダウンを掲載。" />
-    <meta name="twitter:image" content="https://willowy-palmier-89044d.netlify.app/assets/logo.png" />
+    <meta name="twitter:title" content="有限会社チE�Eボックス�E�社冁E��ベンチE10/15 E0/31" />
+    <meta name="twitter:description" content="社冁Eacebookイベント�E特設サイト。開催要E��E��カウントダウンを掲載、E />
+    <meta name="twitter:image" content="https://spiffy-longma-51e336.netlify.app/assets/logo.png" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="有限会社ツーボックス 社内イベント｜Facebookいいね数を競うキャンペーン。期間は10/15〜10/31。カウントダウン搭載。" />
-    <title>有限会社ツーボックス｜社内イベント 10/15–10/31</title>
+    <meta name="description" content="有限会社チE�Eボックス 社冁E��ベント｜FacebookぁE��ね数を競ぁE��ャンペ�Eン。期間�E10/15、E0/31。カウントダウン搭載、E />
+    <title>有限会社チE�Eボックス�E�社冁E��ベンチE10/15 E0/31</title>
     <link rel="icon" href="assets/logo.png" />
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -28,21 +28,29 @@
     <header class="hero">
       <div class="container hero__inner">
         <div class="logo-box">
-          <img id="logo" src="assets/logo.png" data-logo-candidates="assets/logo.png;assets/tsubox.png;assets/tsubox-logo.png;assets/tsubox_logo.png;assets/Logo.png;assets/logo.JPG;assets/logo.jpeg" alt="有限会社ツーボックス ロゴ" class="logo" />
+          <img id="logo" src="assets/logo.png" data-logo-candidates="assets/logo.png;assets/tsubox.png;assets/tsubox-logo.png;assets/tsubox_logo.png;assets/Logo.png;assets/logo.JPG;assets/logo.jpeg" alt="有限会社チE�Eボックス ロゴ" class="logo" />
           <div id="logo-fallback" class="logo-fallback" hidden>tsubox</div>
         </div>
-        <h1 class="title">Facebook いいね！チャレンジ</h1>
-        <p class="subtitle">開催期間：10/15 – 10/31 <span id="event-year"></span></p>
+        <h1 class="title">Facebook ぁE��ね�E�チャレンジ</h1>
+        <p class="subtitle">開催期間�E�E0/15  E10/31 <span id="event-year"></span></p>
 
+        <!-- Yesterday Top 3: ���S�̒����ɔz�u -->
+        <section class="section" id="top3">
+          <div class="container">
+            <h2>����̃g�b�v3</h2>
+            <div class="prizes" id="top3-list" aria-live="polite"></div>
+            <p class="note" id="top3-note"></p>
+          </div>
+        </section>
         <section class="countdown" aria-live="polite">
           <p class="countdown__label" id="countdown-label">開始まで</p>
           <div class="countdown__grid" id="countdown">
             <div class="unit"><span id="dd">00</span><small>日</small></div>
             <div class="unit"><span id="hh">00</span><small>時間</small></div>
-            <div class="unit"><span id="mm">00</span><small>分</small></div>
-            <div class="unit"><span id="ss">00</span><small>秒</small></div>
+            <div class="unit"><span id="mm">00</span><small>刁E/small></div>
+            <div class="unit"><span id="ss">00</span><small>私E/small></div>
           </div>
-          <p class="countdown__ended" id="ended-message" hidden>イベントは終了しました。たくさんのご参加ありがとうございました！</p>
+          <p class="countdown__ended" id="ended-message" hidden>イベント�E終亁E��ました。たくさん�Eご参加ありがとぁE��ざいました�E�E/p>
         </section>
 
         <div class="cta">
@@ -52,29 +60,19 @@
       </div>
     </header>
 
-    <main>
-      <!-- Yesterday Top 3 -->
-      <section class="section" id="top3">
-        <div class="container">
-          <h2>昨日のトップ3</h2>
-          <div class="prizes" id="top3-list" aria-live="polite"></div>
-          <p class="note" id="top3-note"></p>
-        </div>
-      </section>
 
       <section class="section alt portrait" id="cm">
         <div class="container">
           <h2>CM</h2>
           <div class="cm-controls">
-            <div class="cm-dots" id="cm-dots" aria-label="CMページ切替"></div>
+            <div class="cm-dots" id="cm-dots" aria-label="CMペ�Eジ刁E��"></div>
           </div>
           <div class="video-grid" id="cm-grid" data-per-page="3" data-auto="true" data-interval="6000">
             <figure class="video-shell">
               <video class="cm-video" controls preload="metadata" poster="assets/video-poster-1.jpg">
                 <source src="assets/cm1.mp4" type="video/mp4" />
-                お使いのブラウザでは動画の再生がサポートされていない可能性があります。
-              </video>
-              <div class="video-overlay">MP4素材を <code>assets/cm1.mp4</code> に配置してください。</div>
+                お使ぁE�Eブラウザでは動画の再生がサポ�EトされてぁE��ぁE��能性があります、E              </video>
+              <div class="video-overlay">MP4素材を <code>assets/cm1.mp4</code> に配置してください、E/div>
               <figcaption>CM 1</figcaption>
             </figure>
 
@@ -82,7 +80,7 @@
               <video class="cm-video" controls preload="metadata" poster="assets/video-poster-2.jpg">
                 <source src="assets/cm2.mp4" type="video/mp4" />
               </video>
-              <div class="video-overlay">MP4素材を <code>assets/cm2.mp4</code> に配置してください。</div>
+              <div class="video-overlay">MP4素材を <code>assets/cm2.mp4</code> に配置してください、E/div>
               <figcaption>CM 2</figcaption>
             </figure>
 
@@ -90,7 +88,7 @@
               <video class="cm-video" controls preload="metadata" poster="assets/video-poster-3.jpg">
                 <source src="assets/cm3.mp4" type="video/mp4" />
               </video>
-              <div class="video-overlay">MP4素材を <code>assets/cm3.mp4</code> に配置してください。</div>
+              <div class="video-overlay">MP4素材を <code>assets/cm3.mp4</code> に配置してください、E/div>
               <figcaption>CM 3</figcaption>
             </figure>
 
@@ -98,7 +96,7 @@
               <video class="cm-video" controls preload="metadata" poster="assets/video-poster-4.jpg">
                 <source src="assets/cm4.mp4" type="video/mp4" />
               </video>
-              <div class="video-overlay">MP4素材を <code>assets/cm4.mp4</code> に配置してください。</div>
+              <div class="video-overlay">MP4素材を <code>assets/cm4.mp4</code> に配置してください、E/div>
               <figcaption>CM 4</figcaption>
             </figure>
 
@@ -106,7 +104,7 @@
               <video class="cm-video" controls preload="metadata" poster="assets/video-poster-5.jpg">
                 <source src="assets/cm5.mp4" type="video/mp4" />
               </video>
-              <div class="video-overlay">MP4素材を <code>assets/cm5.mp4</code> に配置してください。</div>
+              <div class="video-overlay">MP4素材を <code>assets/cm5.mp4</code> に配置してください、E/div>
               <figcaption>CM 5</figcaption>
             </figure>
 
@@ -114,7 +112,7 @@
               <video class="cm-video" controls preload="metadata" poster="assets/video-poster-6.jpg">
                 <source src="assets/cm6.mp4" type="video/mp4" />
               </video>
-              <div class="video-overlay">MP4素材を <code>assets/cm6.mp4</code> に配置してください。</div>
+              <div class="video-overlay">MP4素材を <code>assets/cm6.mp4</code> に配置してください、E/div>
               <figcaption>CM 6</figcaption>
             </figure>
           </div>
@@ -122,23 +120,21 @@
       </section>
       <section class="section" id="about">
         <div class="container">
-          <h2>イベント概要</h2>
+          <h2>イベント概要E/h2>
           <p>
-            有限会社ツーボックスの社内イベントとして、期間中に「仕事」に関するFacebook投稿を行い、
-            集まった「いいね！」の数を競います。シンプルに、楽しく、前向きに仕事の魅力を外へ発信しましょう！
-          </p>
+            有限会社チE�Eボックスの社冁E��ベントとして、期間中に「仕事」に関するFacebook投稿を行い、E            雁E��った「いぁE�E�E�」�E数を競ぁE��す。シンプルに、楽しく、前向きに仕事�E魁E��を外へ発信しましょぁE��E          </p>
         </div>
       </section>
 
       <section class="section alt" id="how">
         <div class="container">
-          <h2>参加方法</h2>
+          <h2>参加方況E/h2>
           <ol class="steps">
-            <li>期間中（<strong>10/15〜10/31</strong>）に、Facebookで自分の仕事や取り組みについて投稿する。</li>
-            <li>投稿文におすすめハッシュタグ <code>#tsuboxWork</code> を入れる。（任意・社内検索用）</li>
-            <li>同僚や友人にシェアして「いいね！」を集めよう。</li>
+            <li>期間中�E�Estrong>10/15、E0/31</strong>�E�に、Facebookで自刁E�E仕事や取り絁E��につぁE��投稿する、E/li>
+            <li>投稿斁E��おすすめハッシュタグ <code>#tsuboxWork</code> を�Eれる。（任意�E社冁E��索用�E�E/li>
+            <li>同�EめE��人にシェアして「いぁE�E�E�」を雁E��よう、E/li>
           </ol>
-          <p class="note">※ 投稿内容は業務に関するもので、社外秘・個人情報の取り扱いにご注意ください。</p>
+          <p class="note">※ 投稿冁E��は業務に関するも�Eで、社外秘�E個人惁E��の取り扱ぁE��ご注意ください、E/p>
         </div>
       </section>
 
@@ -147,30 +143,30 @@
           <h2>表彰・特典</h2>
           <div class="prizes">
             <div class="prize">
-              <div class="medal gold" aria-label="1位">
+              <div class="medal gold" aria-label="1佁E>
                 <svg class="medal__icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h10l-2 6H9L7 2zm5 7a6 6 0 1 1 0 12a6 6 0 0 1 0-12zm0 2.3l1.38 2.8l3.1.45l-2.24 2.17l.53 3.08L12 18.2l-2.77 1.46l.53-3.08L7.5 12.55l3.1-.45L12 11.3z"/></svg>
               </div>
               <div class="prize__body">
-                <h3>1位</h3>
-                <p>ボーナス（社長のポケットマネーから…）</p>
+                <h3>1佁E/h3>
+                <p>ボ�Eナス�E�社長のポケチE��マネーから…�E�E/p>
               </div>
             </div>
             <div class="prize">
-              <div class="medal silver" aria-label="2位">
+              <div class="medal silver" aria-label="2佁E>
                 <svg class="medal__icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h10l-2 6H9L7 2zm5 7a6 6 0 1 1 0 12a6 6 0 0 1 0-12zm0 2.3l1.38 2.8l3.1.45l-2.24 2.17l.53 3.08L12 18.2l-2.77 1.46l.53-3.08L7.5 12.55l3.1-.45L12 11.3z"/></svg>
               </div>
               <div class="prize__body">
-                <h3>2位</h3>
-                <p>ボーナス（社長のポケットマネーから…）</p>
+                <h3>2佁E/h3>
+                <p>ボ�Eナス�E�社長のポケチE��マネーから…�E�E/p>
               </div>
             </div>
             <div class="prize">
-              <div class="medal bronze" aria-label="3位">
+              <div class="medal bronze" aria-label="3佁E>
                 <svg class="medal__icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h10l-2 6H9L7 2zm5 7a6 6 0 1 1 0 12a6 6 0 0 1 0-12zm0 2.3l1.38 2.8l3.1.45l-2.24 2.17l.53 3.08L12 18.2l-2.77 1.46l.53-3.08L7.5 12.55l3.1-.45L12 11.3z"/></svg>
               </div>
               <div class="prize__body">
-                <h3>3位</h3>
-                <p>ボーナス（社長のポケットマネーから…）</p>
+                <h3>3佁E/h3>
+                <p>ボ�Eナス�E�社長のポケチE��マネーから…�E�E/p>
               </div>
             </div>
           </div>
@@ -180,28 +176,28 @@
 
       <section class="section alt" id="rules">
         <div class="container">
-          <h2>ルール・注意事項</h2>
+          <h2>ルール・注意事頁E/h2>
           <ul class="rules">
-            <li>集計対象は開催期間内の投稿についた「いいね！」数です。</li>
-            <li>投稿の公開範囲は各自の裁量ですが、公開のほうが多くの反応を得やすいです。</li>
-            <li>社外秘情報・個人情報・クライアント情報は掲載禁止。写真の権利関係にもご配慮ください。</li>
-            <li>重複・不正が疑われる場合は運営判断で除外することがあります。</li>
+            <li>雁E��対象は開催期間冁E�E投稿につぁE��「いぁE�E�E�」数です、E/li>
+            <li>投稿の公開篁E��は吁E�Eの裁E��ですが、�E開�EほぁE��多くの反応を得やすいです、E/li>
+            <li>社外秘情報・個人惁E��・クライアント情報は掲載禁止。�E真�E権利関係にもご配�Eください、E/li>
+            <li>重褁E�E不正が疑われる場合�E運営判断で除外することがあります、E/li>
           </ul>
         </div>
       </section>
 
       <section class="section" id="contact">
         <div class="container">
-          <h2>お問い合わせ</h2>
-          <p>本イベントに関するお問い合わせは、社長まで直接お問い合わせください。</p>
+          <h2>お問ぁE��わせ</h2>
+          <p>本イベントに関するお問ぁE��わせは、社長まで直接お問ぁE��わせください、E/p>
         </div>
       </section>
     </main>
 
     <footer class="footer">
       <div class="container footer__inner">
-        <span>© <span id="year"></span> 有限会社ツーボックス</span>
-        <span>期間：10/15 – 10/31</span>
+        <span>© <span id="year"></span> 有限会社チE�Eボックス</span>
+        <span>期間�E�E0/15  E10/31</span>
       </div>
     </footer>
 

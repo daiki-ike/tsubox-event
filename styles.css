@@ -117,6 +117,11 @@ body {
 .prize__body h3 { margin: 0; font-size: 1.1rem; color: var(--text); }
 .prize__body p { margin: 6px 0 0; }
 
+/* Top3 adjustments: names in white and bolder */
+#top3 .prize__body p { color: #fff; font-weight: 700; font-size: 1.2rem; }
+#top3 .prize__body a { color: #fff; text-decoration: underline; }
+#top3 h2 { margin-bottom: 10px; }
+
 /* Notice (disclaimer) */
 .notice { display: flex; align-items: center; gap: 12px; margin-top: 14px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; background: rgba(255,255,255,0.08); font-size: 1.1rem; }
 .notice__icon { width: 20px; height: 20px; color: #facc15; flex: 0 0 auto; }

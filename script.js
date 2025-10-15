@@ -116,9 +116,21 @@
         const keys = Object.keys(data || {}).sort();
         key = keys[keys.length - 1];
       }
-      const items = (key && data[key]) || [];
+      const raw = (key && data[key]) || [];
 
-      if (!items.length) {
+      // 受け付ける形式:
+      // - ["山田 太郎","佐藤 花子","鈴木 次郎"]
+      // - { "1": "山田 太郎", "2": "佐藤 花子", "3": "鈴木 次郎" }
+      // - [{ name: "山田 太郎" }, ...] も後方互換
+      let names = [];
+      if (Array.isArray(raw)) {
+        if (typeof raw[0] === 'string') names = raw;
+        else names = raw.map(it => (it && (it.name || it.title)) || '').filter(Boolean);
+      } else if (raw && typeof raw === 'object') {
+        names = [raw['1'], raw['2'], raw['3']].filter(Boolean);
+      }
+
+      if (!names.length) {
         note && (note.textContent = 'トップ3情報はまだありません。');
         return;
       }
@@ -130,7 +142,7 @@
 
       const ranks = ['gold', 'silver', 'bronze'];
       wrap.innerHTML = '';
-      items.slice(0, 3).forEach((it, idx) => {
+      names.slice(0, 3).forEach((name, idx) => {
         const card = document.createElement('div');
         card.className = 'prize';
 
@@ -141,23 +153,9 @@
 
         const body = document.createElement('div');
         body.className = 'prize__body';
-        const title = document.createElement('h3');
-        title.textContent = it.title || `${idx + 1}位`;
-
         const p = document.createElement('p');
-        const name = it.name ? String(it.name) : '';
-        const link = it.link ? String(it.link) : '';
-        if (link) {
-          const a = document.createElement('a');
-          a.href = link; a.target = '_blank'; a.rel = 'noopener';
-          a.textContent = name || 'リンク';
-          p.append('投稿者: ', a);
-        } else {
-          p.textContent = name ? `投稿者: ${name}` : '';
-        }
-
-        body.appendChild(title);
-        if (p.textContent || p.childNodes.length) body.appendChild(p);
+        p.textContent = String(name || '');
+        body.appendChild(p);
 
         card.appendChild(medal);
         card.appendChild(body);
