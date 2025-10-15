@@ -174,9 +174,9 @@
         const keys = Object.keys(data || {}).sort();
         const last = keys[keys.length - 1];
         if (last) names = Array.isArray(data[last]) ? data[last] : [data[last]['1'], data[last]['2'], data[last]['3']].filter(Boolean);
-        note && (note.textContent = `表示中の日付: ${(last || key).replaceAll('-', '/')}`);
+        note && (note.textContent = `ランキング集計日: ${(last || key).replaceAll('-', '/')}`);
       } else {
-        note && (note.textContent = `表示中の日付: ${key.replaceAll('-', '/')}`);
+        note && (note.textContent = `ランキング集計日: ${key.replaceAll('-', '/')}`);
       }
       wrap.innerHTML = '';
       const medalSvg = '<svg class="medal__icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h10l-2 6H9L7 2zm5 7a6 6 0 1 1 0 12a6 6 0 0 1 0-12zm0 2.3l1.38 2.8l3.1.45l-2.24 2.17l.53 3.08L12 18.2l-2.77 1.46l.53-3.08L7.5 12.55l3.1-.45L12 11.3z"/></svg>';
