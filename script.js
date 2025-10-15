@@ -69,6 +69,72 @@
     logoImg.addEventListener('error', () => { logoImg.hidden = true; logoFallback.hidden = false; });
   }
 
+  // CM: 6本の動画を3本ずつ表示し、自動でページ送り
+  (function cmCarousel() {
+    const grid = document.getElementById('cm-grid');
+    if (!grid) return;
+    const perPage = Number(grid.getAttribute('data-per-page') || 3);
+    const intervalMs = Number(grid.getAttribute('data-interval') || 6000);
+    const auto = String(grid.getAttribute('data-auto') || 'true') !== 'false';
+    const items = Array.from(grid.querySelectorAll('.video-shell'));
+    const dotsWrap = document.getElementById('cm-dots');
+    let page = 1; let totalPages = Math.max(1, Math.ceil(items.length / perPage));
+    let timer = null;
+
+    function render() {
+      const start = (page - 1) * perPage;
+      const end = start + perPage;
+      items.forEach((el, i) => { el.style.display = (i >= start && i < end) ? '' : 'none'; });
+      if (dotsWrap) {
+        const dots = Array.from(dotsWrap.querySelectorAll('.cm-dot'));
+        dots.forEach((d, i) => d.classList.toggle('is-active', i === page - 1));
+      }
+    }
+
+    function buildDots() {
+      if (!dotsWrap) return;
+      dotsWrap.innerHTML = '';
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.type = 'button'; btn.className = 'cm-dot';
+        btn.setAttribute('aria-label', `${i}ページ目へ`);
+        btn.addEventListener('click', () => { stopAuto(); page = i; render(); startAuto(); });
+        dotsWrap.appendChild(btn);
+      }
+    }
+
+    function nextPage() { page = page >= totalPages ? 1 : page + 1; render(); }
+    function startAuto() { if (!auto || timer || totalPages <= 1) return; timer = setInterval(() => { // 再生中の動画があればスキップ
+        const playing = items.some((el) => { const v = el.querySelector('video'); return v && !v.paused && el.style.display !== 'none'; });
+        if (!playing) nextPage();
+      }, intervalMs); }
+    function stopAuto() { if (timer) { clearInterval(timer); timer = null; } }
+
+    // 再生マークの表示/非表示
+    items.forEach((el) => {
+      const v = el.querySelector('video'); const overlay = el.querySelector('.video-overlay');
+      if (!v || !overlay) return;
+      const show = () => overlay.style.visibility = 'visible';
+      const hide = () => overlay.style.visibility = 'hidden';
+      show();
+      v.addEventListener('play', hide);
+      v.addEventListener('pause', show);
+      v.addEventListener('ended', show);
+    });
+
+    // ホバーで一時停止
+    [grid, dotsWrap].filter(Boolean).forEach((el) => {
+      el.addEventListener('mouseenter', stopAuto);
+      el.addEventListener('mouseleave', startAuto);
+      el.addEventListener('focusin', stopAuto);
+      el.addEventListener('focusout', startAuto);
+    });
+
+    buildDots();
+    render();
+    startAuto();
+  })();
+
   // 昨日のトップ3（名前のみ、順位表示あり）
   (async function renderTop3() {
     const wrap = document.getElementById('top3-list');

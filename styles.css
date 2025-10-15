@@ -166,11 +166,9 @@ body {
   margin: 0; /* reset UA default margin on figure */
 }
 .video-shell video { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; background: transparent; }
-.video-overlay {
-  position: absolute; inset: 0;
-  /* ガイド表示は不要になったため非表示化。動画のクリック操作を妨げない */
-  display: none; pointer-events: none;
-}
+.video-overlay { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
+.video-overlay .play-badge { width: 64px; height: 64px; border-radius: 999px; background: rgba(0,0,0,0.28); position: relative; box-shadow: 0 6px 16px rgba(0,0,0,0.35); }
+.video-overlay .play-badge::after { content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-35%,-50%); border-left: 18px solid #fff; border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
 .video-shell figcaption { margin-top: 8px; color: var(--muted); font-size: .95rem; }
 
 /* Portrait mode for CM section */
