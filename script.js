@@ -117,6 +117,23 @@
       const show = () => overlay.style.visibility = 'visible';
       const hide = () => overlay.style.visibility = 'hidden';
       show();
+      // 初期表示で2秒地点のフレームを表示（黒画面防止）
+      const SEEK_SEC = 2;
+      const prime = () => {
+        try {
+          // duration が取れていれば終端を超えないようクランプ
+          let t = SEEK_SEC;
+          if (isFinite(v.duration) && v.duration > 0) {
+            t = Math.min(SEEK_SEC, Math.max(0, v.duration - 0.2));
+          }
+          v.currentTime = t;
+          v.pause();
+        } catch (e) {}
+      };
+      v.addEventListener('loadedmetadata', prime, { once: true });
+      // Safari 対策: canplay でも実行して念押し
+      v.addEventListener('canplay', () => { if (v.currentTime < 0.5) prime(); }, { once: true });
+
       v.addEventListener('play', hide);
       v.addEventListener('pause', show);
       v.addEventListener('ended', show);
