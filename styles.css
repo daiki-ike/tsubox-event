@@ -116,6 +116,7 @@ body {
 
 .prize__body h3 { margin: 0; font-size: 1.1rem; color: var(--text); }
 .prize__body p { margin: 6px 0 0; }
+#prize .prize__body p { white-space: normal; overflow: visible; text-overflow: unset; }
 
 /* Top3 adjustments: names in white and bolder */
 #top3 .prize__body p { color: #fff; font-weight: 700; font-size: 1.2rem; }
