@@ -108,9 +108,9 @@ body {
 /* Medal icon */
 .medal { position: relative; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; color: #111; overflow: hidden; }
 .medal::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(100% 100% at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.45)); mix-blend-mode: screen; }
-.medal.gold { background: radial-gradient(120% 120% at 30% 20%, #f8d066, #f59e0b); box-shadow: 0 8px 24px rgba(245,158,11,0.35); }
-.medal.silver { background: radial-gradient(120% 120% at 30% 20%, #e5e7eb, #9ca3af); box-shadow: 0 8px 24px rgba(156,163,175,0.35); }
-.medal.bronze { background: radial-gradient(120% 120% at 30% 20%, #e0a46a, #b45309); box-shadow: 0 8px 24px rgba(180,83,9,0.35); }
+.medal.gold { background: radial-gradient(120% 120% at 30% 20%, #ffd54f, #ffa000); box-shadow: 0 8px 24px rgba(255,168,0,0.45); }
+.medal.silver { background: radial-gradient(120% 120% at 30% 20%, #f3f4f6, #9ca3af); box-shadow: 0 8px 24px rgba(156,163,175,0.40); }
+.medal.bronze { background: radial-gradient(120% 120% at 30% 20%, #cd7f32, #8c4a2f); box-shadow: 0 8px 24px rgba(140,74,47,0.45); }
 .medal__icon { position: relative; width: 28px; height: 28px; color: rgba(0,0,0,0.75); }
 /* rank badge removed per request */
 
@@ -121,6 +121,8 @@ body {
 #top3 .prize__body p { color: #fff; font-weight: 700; font-size: 1.2rem; }
 #top3 .prize__body a { color: #fff; text-decoration: underline; }
 #top3 h2 { margin-bottom: 10px; }
+/* Rank label */
+#top3 .rank-label { display: inline-block; min-width: 2.5em; margin-right: .3em; padding: .12em .45em; border-radius: 999px; background: rgba(255,255,255,0.12); font-weight: 800; color: #fff; }
 
 /* Notice (disclaimer) */
 .notice { display: flex; align-items: center; gap: 12px; margin-top: 14px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; background: rgba(255,255,255,0.08); font-size: 1.1rem; }
