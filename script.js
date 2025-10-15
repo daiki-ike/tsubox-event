@@ -85,6 +85,89 @@
     const next = 1000 - (Date.now() % 1000);
     setTimeout(() => { tick(); schedule(); }, next);
   })();
+  
+  // ===== 昨日のトップ3（数は表示しない） =====
+  (async function renderTop3() {
+    const wrap = document.getElementById('top3-list');
+    const note = document.getElementById('top3-note');
+    if (!wrap) return; // セクションが無ければ何もしない
+
+    // JST の「昨日」を YYYY-MM-DD で求める
+    const nowUtc = Date.now();
+    const jstOffsetMs = 9 * 60 * 60 * 1000;
+    const jst = new Date(nowUtc + jstOffsetMs);
+    const yst = new Date(jst.getTime() - 24 * 60 * 60 * 1000);
+    const toKey = (d) => {
+      const y = d.getUTCFullYear();
+      const m = String(d.getUTCMonth() + 1).padStart(2, '0');
+      const dd = String(d.getUTCDate()).padStart(2, '0');
+      return `${y}-${m}-${dd}`;
+    };
+    const yesterdayKey = toKey(yst);
+
+    try {
+      const res = await fetch('top3.json', { cache: 'no-store' });
+      if (!res.ok) throw new Error('top3.json not found');
+      const data = await res.json();
+
+      // 優先: 昨日のキー。なければ最新キーを使う
+      let key = yesterdayKey;
+      if (!data[key]) {
+        const keys = Object.keys(data || {}).sort();
+        key = keys[keys.length - 1];
+      }
+      const items = (key && data[key]) || [];
+
+      if (!items.length) {
+        note && (note.textContent = 'トップ3情報はまだありません。');
+        return;
+      }
+
+      note && (note.textContent = `表示中の日付: ${key.replaceAll('-', '/')}`);
+
+      // Medal SVG（既存の表彰セクションと同じアイコン）
+      const medalSvg = '<svg class="medal__icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h10l-2 6H9L7 2zm5 7a6 6 0 1 1 0 12a6 6 0 0 1 0-12zm0 2.3l1.38 2.8l3.1.45l-2.24 2.17l.53 3.08L12 18.2l-2.77 1.46l.53-3.08L7.5 12.55l3.1-.45L12 11.3z"/></svg>';
+
+      const ranks = ['gold', 'silver', 'bronze'];
+      wrap.innerHTML = '';
+      items.slice(0, 3).forEach((it, idx) => {
+        const card = document.createElement('div');
+        card.className = 'prize';
+
+        const medal = document.createElement('div');
+        medal.className = `medal ${ranks[idx] || 'gold'}`;
+        medal.setAttribute('aria-label', `${idx + 1}位`);
+        medal.innerHTML = medalSvg;
+
+        const body = document.createElement('div');
+        body.className = 'prize__body';
+        const title = document.createElement('h3');
+        title.textContent = it.title || `${idx + 1}位`;
+
+        const p = document.createElement('p');
+        const name = it.name ? String(it.name) : '';
+        const link = it.link ? String(it.link) : '';
+        if (link) {
+          const a = document.createElement('a');
+          a.href = link; a.target = '_blank'; a.rel = 'noopener';
+          a.textContent = name || 'リンク';
+          p.append('投稿者: ', a);
+        } else {
+          p.textContent = name ? `投稿者: ${name}` : '';
+        }
+
+        body.appendChild(title);
+        if (p.textContent || p.childNodes.length) body.appendChild(p);
+
+        card.appendChild(medal);
+        card.appendChild(body);
+        wrap.appendChild(card);
+      });
+    } catch (e) {
+      note && (note.textContent = 'トップ3の読み込みに失敗しました。');
+      try { console.error(e); } catch (_) {}
+    }
+  })();
 
   // タイトルの改行ポイントを確実に挿入（文字化け環境でも動作）
   try {
