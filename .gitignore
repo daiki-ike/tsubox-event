@@ -1,0 +1,23 @@
+# OS/Editor junk
+.DS_Store
+Thumbs.db
+*.log
+
+# Environment files
+.env
+.env.*
+
+# Node/build outputs (future-proofing)
+node_modules/
+dist/
+build/
+.cache/
+.next/
+.vite/
+coverage/
+out/
+vite-dist/
+
+# Misc
+.vercel/
+.netlify/
