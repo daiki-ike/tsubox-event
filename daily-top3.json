@@ -1,0 +1,22 @@
+{
+  "2025-10-25": [
+    {
+      "rank": 1,
+      "name": "aa",
+      "likes": 17,
+      "postImage": "assetspost-thumb-1.jpg"
+    },
+    {
+      "rank": 2,
+      "name": "bb",
+      "likes": 16,
+      "postImage": "assetspost-thumb-2.jpg"
+    },
+    {
+      "rank": 3,
+      "name": "cc",
+      "likes": 15,
+      "postImage": "assetspost-thumb-3.jpg"
+    }
+  ]
+}
