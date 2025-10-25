@@ -198,8 +198,7 @@
 
     const nowUtc = Date.now();
     const jst = new Date(nowUtc + 9 * 60 * 60 * 1000);
-    const yst = new Date(jst.getTime() - 24 * 60 * 60 * 1000);
-    const key = `${yst.getUTCFullYear()}-${String(yst.getUTCMonth()+1).padStart(2,'0')}-${String(yst.getUTCDate()).padStart(2,'0')}`;
+    const key = `${jst.getUTCFullYear()}-${String(jst.getUTCMonth()+1).padStart(2,'0')}-${String(jst.getUTCDate()).padStart(2,'0')}`;
 
     try {
       const res = await fetch('rankings.json', { cache: 'no-store' });
@@ -296,8 +295,7 @@
 
     const nowUtc = Date.now();
     const jst = new Date(nowUtc + 9 * 60 * 60 * 1000);
-    const yst = new Date(jst.getTime() - 24 * 60 * 60 * 1000);
-    const key = `${yst.getUTCFullYear()}-${String(yst.getUTCMonth()+1).padStart(2,'0')}-${String(yst.getUTCDate()).padStart(2,'0')}`;
+    const key = `${jst.getUTCFullYear()}-${String(jst.getUTCMonth()+1).padStart(2,'0')}-${String(jst.getUTCDate()).padStart(2,'0')}`;
 
     try {
       const res = await fetch('daily-top3.json', { cache: 'no-store' });
@@ -330,25 +328,10 @@
 
       posts.slice(0, 3).forEach((post) => {
         const card = document.createElement('a');
-        card.className = 'daily-post-card';
+        card.className = 'daily-post-card-simple';
         card.href = groupUrl;
         card.target = '_blank';
         card.rel = 'noopener noreferrer';
-
-        const img = document.createElement('img');
-        img.className = 'daily-post-thumbnail';
-        img.src = post.postImage || 'assets/placeholder.jpg';
-        img.alt = `${post.name}の投稿`;
-        img.loading = 'lazy';
-
-        // 画像読み込みエラー時のフォールバック
-        img.onerror = function() {
-          this.style.background = 'linear-gradient(135deg, rgba(34,193,241,0.2), rgba(20,163,214,0.2))';
-          this.alt = '画像を読み込めませんでした';
-        };
-
-        const info = document.createElement('div');
-        info.className = 'daily-post-info';
 
         const name = document.createElement('p');
         name.className = 'daily-post-name';
@@ -358,10 +341,8 @@
         likes.className = 'daily-post-likes';
         likes.innerHTML = `<span>${post.likes || 0}</span> ♡`;
 
-        info.appendChild(name);
-        info.appendChild(likes);
-        card.appendChild(img);
-        card.appendChild(info);
+        card.appendChild(name);
+        card.appendChild(likes);
         grid.appendChild(card);
       });
     } catch (e) {
