@@ -396,8 +396,11 @@ body {
   #top3 .prize:nth-child(1)::after { height: 140px; }
   #top3 .prize:nth-child(2)::after { height: 110px; }
   #top3 .prize:nth-child(3)::after { height: 85px; }
-  #top3 .rank-label { font-size: 2rem; }
-  #top3 .prize__body { padding: 12px 6px; }
+  #top3 .rank-label { font-size: 1.5rem; }
+  #top3 .prize__body { padding: 8px 4px; }
+  #top3 .rank-name { font-size: 1rem; }
+  #top3 .rank-name-multi .name-part { font-size: 1rem; }
+  #top3 .ranking-change { font-size: 1rem; }
 
   /* Adjust text position for mobile - medal height (60px + 8px margin) + podium center */
   #top3 .prize:nth-child(2) .prize__body {
