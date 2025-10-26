@@ -638,9 +638,10 @@ body {
 
 #top3 .prize__body p {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  gap: 4px;
 }
 
 #top3 .ranking-change {
