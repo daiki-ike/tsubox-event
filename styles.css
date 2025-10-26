@@ -284,10 +284,16 @@ body {
 }
 
 #top3 .rank-name {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
   font-size: 1.4rem;
   font-weight: 700;
   color: #fff;
+}
+
+#top3 .rank-name .name-text {
+  display: inline;
 }
 
 /* Position adjustments for 2nd and 3rd place text */

@@ -282,8 +282,9 @@
           }).join('');
           p.innerHTML = `<div class="rank-name-multi">${nameParts}</div>`;
         } else {
-          // 単独の場合: 従来通り
-          p.innerHTML = `<span class="rank-name">${item.name || ''}</span>${getChangeIndicator(item.rank, item.prevRank)}`;
+          // 単独の場合: 名前テキストと矢印を同じspanの中に入れる
+          const indicator = getChangeIndicator(item.rank, item.prevRank);
+          p.innerHTML = `<span class="rank-name"><span class="name-text">${item.name || ''}</span>${indicator}</span>`;
         }
 
         body.appendChild(rankLabel);
