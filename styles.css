@@ -614,13 +614,6 @@ body {
   font-size: 0.9rem;
 }
 
-/* Top3 に矢印を追加するスタイル */
-#top3 .rank-name {
-  display: block;
-  font-size: 1rem;
-  margin-bottom: 4px;
-}
-
 /* Top3 同一順位対応 */
 #top3 .rank-name-multi {
   display: flex;
@@ -637,13 +630,10 @@ body {
 }
 
 #top3 .rank-name-multi .name-part {
-  font-size: 0.95rem;
+  font-size: 1.8rem;
   color: #fff;
   white-space: nowrap;
-}
-
-#top3 .rank-label {
-  display: none;
+  font-weight: 700;
 }
 
 #top3 .prize__body p {
