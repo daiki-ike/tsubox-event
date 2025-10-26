@@ -653,6 +653,8 @@ body {
 #top3 .ranking-change {
   font-size: 1.2rem;
   margin-top: 0;
+  min-width: auto;
+  width: auto;
 }
 
 /* 同一順位の場合の矢印サイズ調整 */
