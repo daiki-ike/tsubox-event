@@ -258,8 +258,28 @@
         const body = document.createElement('div');
         body.className = 'prize__body';
 
+        // 名前を区切り文字で分割（, や ・ に対応）
+        const names = (item.name || '').split(/[,、・]/).map(n => n.trim()).filter(n => n);
+
+        // 前日順位も区切り文字で分割
+        const prevRanks = item.prevRank !== null && item.prevRank !== undefined
+          ? String(item.prevRank).split(/[,、・]/).map(r => r.trim()).filter(r => r).map(r => parseInt(r))
+          : [];
+
         const p = document.createElement('p');
-        p.innerHTML = `<span class="rank-name">${item.name || ''}</span>${getChangeIndicator(item.rank, item.prevRank)}`;
+
+        if (names.length > 1) {
+          // 複数名の場合: 各名前に対応する矢印を表示
+          const nameParts = names.map((name, i) => {
+            const prevRank = prevRanks[i] !== undefined ? prevRanks[i] : null;
+            const indicator = getChangeIndicator(item.rank, prevRank);
+            return `<span class="name-with-indicator"><span class="name-part">${name}</span>${indicator}</span>`;
+          }).join('');
+          p.innerHTML = `<div class="rank-name-multi">${nameParts}</div>`;
+        } else {
+          // 単独の場合: 従来通り
+          p.innerHTML = `<span class="rank-name">${item.name || ''}</span>${getChangeIndicator(item.rank, item.prevRank)}`;
+        }
 
         body.appendChild(p);
         card.appendChild(medal);
@@ -273,10 +293,37 @@
         rankings.slice(3, 10).forEach((item) => {
           const rankItem = document.createElement('div');
           rankItem.className = 'ranking-item';
+
+          // 名前を区切り文字で分割（, や ・ に対応）
+          const names = (item.name || '').split(/[,、・]/).map(n => n.trim()).filter(n => n);
+
+          // 前日順位も区切り文字で分割
+          const prevRanks = item.prevRank !== null && item.prevRank !== undefined
+            ? String(item.prevRank).split(/[,、・]/).map(r => r.trim()).filter(r => r).map(r => parseInt(r))
+            : [];
+
+          let nameHtml;
+          let indicatorHtml;
+
+          if (names.length > 1) {
+            // 複数名の場合: 各名前に対応する矢印を表示
+            const nameParts = names.map((name, i) => {
+              const prevRank = prevRanks[i] !== undefined ? prevRanks[i] : null;
+              const indicator = getChangeIndicator(item.rank, prevRank);
+              return `<span class="name-with-indicator"><span class="name-part">${name}</span>${indicator}</span>`;
+            }).join('');
+            nameHtml = `<div class="ranking-name-multi">${nameParts}</div>`;
+            indicatorHtml = ''; // 矢印は各名前の横に表示済み
+          } else {
+            // 単独の場合: 従来通り
+            nameHtml = `<div class="ranking-name">${item.name || ''}</div>`;
+            indicatorHtml = getChangeIndicator(item.rank, item.prevRank);
+          }
+
           rankItem.innerHTML = `
             <div class="ranking-number">${item.rank}</div>
-            <div class="ranking-name">${item.name || ''}</div>
-            ${getChangeIndicator(item.rank, item.prevRank)}
+            ${nameHtml}
+            ${indicatorHtml}
           `;
           rankings410Wrap.appendChild(rankItem);
         });

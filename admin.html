@@ -66,7 +66,7 @@
         </div>
 
         <h2>📊 ランキング管理（1位～10位）</h2>
-        <p class="muted">前日順位を入力すると、自動で矢印（↑↓←）が計算されます。新規の場合は空欄にしてください。</p>
+        <p class="muted">前日順位を入力すると、自動で矢印（↑↓←）が計算されます。新規の場合は空欄にしてください。<br>※ <strong>同一順位の場合</strong>: 氏名欄に「山田太郎, 佐藤花子」、前日順位欄に「3, 4」のように「,」で区切って入力してください。各人に対応する矢印が表示されます。</p>
 
         <div id="rankings-form">
           <!-- JavaScriptで動的に生成 -->
@@ -178,7 +178,7 @@
               </div>
               <div>
                 <label for="prev-${i}">前日順位</label>
-                <input type="number" id="prev-${i}" min="1" max="20" placeholder="例: 2" />
+                <input type="text" id="prev-${i}" placeholder="例: 2 (複数の場合: 3, 4)" />
               </div>
               <div style="display: flex; align-items: flex-end;">
                 <span id="indicator-${i}" class="preview-indicator"></span>
@@ -262,7 +262,16 @@
             if (!name) continue;
 
             const prevRankValue = $(`prev-${i}`).value.trim();
-            const prevRank = prevRankValue ? parseInt(prevRankValue) : null;
+
+            // カンマ区切りの場合は文字列として保存、単一の場合は数値に変換
+            let prevRank = null;
+            if (prevRankValue) {
+              if (prevRankValue.includes(',') || prevRankValue.includes('、') || prevRankValue.includes('・')) {
+                prevRank = prevRankValue; // 区切り文字がある場合は文字列のまま
+              } else {
+                prevRank = parseInt(prevRankValue); // 単一の場合は数値
+              }
+            }
 
             rankings.push({
               rank: i,
