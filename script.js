@@ -258,6 +258,11 @@
         const body = document.createElement('div');
         body.className = 'prize__body';
 
+        // 順位ラベルを追加（1, 2, 3）
+        const rankLabel = document.createElement('div');
+        rankLabel.className = 'rank-label';
+        rankLabel.textContent = item.rank;
+
         // 名前を区切り文字で分割（, や ・ に対応）
         const names = (item.name || '').split(/[,、・]/).map(n => n.trim()).filter(n => n);
 
@@ -281,6 +286,7 @@
           p.innerHTML = `<span class="rank-name">${item.name || ''}</span>${getChangeIndicator(item.rank, item.prevRank)}`;
         }
 
+        body.appendChild(rankLabel);
         body.appendChild(p);
         card.appendChild(medal);
         card.appendChild(body);
