@@ -630,7 +630,7 @@ body {
 }
 
 #top3 .rank-name-multi .name-part {
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   color: #fff;
   white-space: nowrap;
   font-weight: 700;
@@ -644,8 +644,13 @@ body {
 }
 
 #top3 .ranking-change {
+  font-size: 1.2rem;
+  margin-top: 0;
+}
+
+/* 同一順位の場合の矢印サイズ調整 */
+#top3 .rank-name-multi .ranking-change {
   font-size: 1rem;
-  margin-top: 4px;
 }
 
 /* ===== Daily Top3 Posts ===== */
