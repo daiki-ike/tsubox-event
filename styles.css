@@ -285,7 +285,7 @@ body {
 
 #top3 .rank-name {
   display: block;
-  font-size: 30px;
+  font-size: 1.4rem;
   font-weight: 700;
   color: #fff;
 }
@@ -625,7 +625,7 @@ body {
 #top3 .rank-name-multi .name-with-indicator {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   justify-content: center;
 }
 
