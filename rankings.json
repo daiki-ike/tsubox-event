@@ -102,5 +102,57 @@
       "name": "広田恵介",
       "prevRank": null
     }
+  ],
+  "2025-10-26": [
+    {
+      "rank": 1,
+      "name": "河野竜馬",
+      "prevRank": 1
+    },
+    {
+      "rank": 2,
+      "name": "齋藤大輝",
+      "prevRank": 2
+    },
+    {
+      "rank": 3,
+      "name": "中井隆太",
+      "prevRank": 3
+    },
+    {
+      "rank": 4,
+      "name": "瀬和日莉",
+      "prevRank": 3
+    },
+    {
+      "rank": 5,
+      "name": "玉置涼太",
+      "prevRank": 4
+    },
+    {
+      "rank": 6,
+      "name": "竹内学",
+      "prevRank": 5
+    },
+    {
+      "rank": 7,
+      "name": "藤田真理菜",
+      "prevRank": 6
+    },
+    {
+      "rank": 8,
+      "name": "秋田美帆",
+      "prevRank": 7
+    },
+    {
+      "rank": 9,
+      "name": "竹内純",
+      "prevRank": 8
+    },
+    {
+      "rank": 10,
+      "name": "白川哲平",
+      "prevRank": 9
+    }
   ]
 }
