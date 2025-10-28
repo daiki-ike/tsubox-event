@@ -111,48 +111,48 @@
     },
     {
       "rank": 2,
-      "name": "齋藤大輝",
-      "prevRank": 2
-    },
-    {
-      "rank": 3,
       "name": "中井隆太",
       "prevRank": 3
     },
     {
+      "rank": 3,
+      "name": "齋藤大輝",
+      "prevRank": 2
+    },
+    {
       "rank": 4,
       "name": "瀬和日莉",
-      "prevRank": 3
+      "prevRank": 4
     },
     {
       "rank": 5,
       "name": "玉置涼太",
-      "prevRank": 4
-    },
-    {
-      "rank": 6,
-      "name": "竹内学",
       "prevRank": 5
     },
     {
+      "rank": 6,
+      "name": "秋田美帆",
+      "prevRank": 8
+    },
+    {
       "rank": 7,
-      "name": "藤田真理菜",
+      "name": "竹内学",
       "prevRank": 6
     },
     {
       "rank": 8,
-      "name": "秋田美帆",
-      "prevRank": 7
+      "name": "白川哲平",
+      "prevRank": 10
     },
     {
       "rank": 9,
-      "name": "竹内純",
-      "prevRank": 8
+      "name": "藤田真理菜",
+      "prevRank": 7
     },
     {
       "rank": 10,
-      "name": "白川哲平",
-      "prevRank": 9
+      "name": "畠山勇紀",
+      "prevRank": null
     }
   ]
 }
