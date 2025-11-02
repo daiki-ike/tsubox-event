@@ -1,106 +1,64 @@
 {
-  "2025-10-24": [
+  "2025-10-31": [
     {
       "rank": 1,
-      "name": "aa",
-      "prevRank": 1
-    },
-    {
-      "rank": 2,
-      "name": "bb",
-      "prevRank": 3
-    },
-    {
-      "rank": 3,
-      "name": "cc",
-      "prevRank": 2
-    },
-    {
-      "rank": 4,
-      "name": "dd",
-      "prevRank": 6
-    },
-    {
-      "rank": 5,
-      "name": "ee",
-      "prevRank": 5
-    },
-    {
-      "rank": 6,
-      "name": "ff",
-      "prevRank": 10
-    },
-    {
-      "rank": 7,
-      "name": "gg",
-      "prevRank": 9
-    },
-    {
-      "rank": 8,
-      "name": "hh",
-      "prevRank": 8
-    },
-    {
-      "rank": 9,
-      "name": "ii",
-      "prevRank": null
-    },
-    {
-      "rank": 10,
-      "name": "jj",
-      "prevRank": null
-    }
-  ],
-  "2025-10-25": [
-    {
-      "rank": 1,
-      "name": "河野竜馬",
-      "prevRank": 1
-    },
-    {
-      "rank": 2,
       "name": "齋藤大輝",
-      "prevRank": 2
+      "prevRank": null,
+      "likes": 304
+    },
+    {
+      "rank": 2,
+      "name": "河野竜馬",
+      "prevRank": null,
+      "likes": 288
     },
     {
       "rank": 3,
-      "name": "瀬和日莉,中井隆太",
-      "prevRank": "3,5"
+      "name": "瀬和日莉",
+      "prevRank": null,
+      "likes": 248
     },
     {
       "rank": 4,
-      "name": "玉置涼太",
-      "prevRank": 4
+      "name": "中井隆太",
+      "prevRank": null,
+      "likes": 226
     },
     {
       "rank": 5,
-      "name": "竹内学",
-      "prevRank": 6
+      "name": "玉置涼太",
+      "prevRank": null,
+      "likes": 164
     },
     {
       "rank": 6,
-      "name": "藤田真理菜",
-      "prevRank": 7
+      "name": "秋田美帆",
+      "prevRank": null,
+      "likes": 94
     },
     {
       "rank": 7,
-      "name": "秋田美帆",
-      "prevRank": 8
+      "name": "長濱由璃",
+      "prevRank": null,
+      "likes": 76
     },
     {
       "rank": 8,
-      "name": "竹内純",
-      "prevRank": 9
+      "name": "藤田真理菜",
+      "prevRank": null,
+      "likes": 64
     },
     {
       "rank": 9,
       "name": "白川哲平",
-      "prevRank": 10
+      "prevRank": null,
+      "likes": 60
     },
     {
       "rank": 10,
-      "name": "広田恵介",
-      "prevRank": null
+      "name": "竹内学",
+      "prevRank": null,
+      "likes": 59
     }
   ],
   "2025-10-26": [
