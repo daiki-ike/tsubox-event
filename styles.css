@@ -304,6 +304,13 @@ body {
   filter: drop-shadow(0 0 6px rgba(205,127,50,0.5));
 }
 
+/* PC版のみ: 3位の「3」を表彰台の中に入れる */
+@media (min-width: 641px) {
+  #top3 .prize:nth-child(3) .rank-label {
+    margin-top: 60px;
+  }
+}
+
 #top3 .rank-name {
   display: flex;
   flex-direction: column;
@@ -881,6 +888,12 @@ body {
   word-break: keep-all;
   overflow-wrap: break-word;
   padding: 0 16px;
+}
+
+@media (min-width: 768px) {
+  .thank-you-message {
+    text-align: center;
+  }
 }
 
 /* ===== イベント統計 ===== */
