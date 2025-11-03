@@ -11,93 +11,65 @@
   // 年度とカウントダウン設定
   const now = new Date();
   const currentYear = now.getFullYear();
-  const passedOctEnd = (now.getMonth() + 1 > 10) || ((now.getMonth() + 1 === 10) && now.getDate() > 31);
-  const eventYear = passedOctEnd ? currentYear + 1 : currentYear;
+  const eventYear = 2025; // イベント年を2025年に固定
   const start = new Date(`${eventYear}-10-15T00:00:00+09:00`);
   const end = new Date(`${eventYear}-10-31T23:59:59+09:00`);
 
   const $ = (id) => document.getElementById(id);
-  const dd = $("dd"), hh = $("hh"), mm = $("mm"), ss = $("ss");
-  const label = $("countdown-label");
-  const ended = $("ended-message");
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = String(now.getFullYear());
   const ey = document.getElementById("event-year");
   if (ey) ey.textContent = `（${eventYear}年）`;
 
-  function pad(n) { return n.toString().padStart(2, "0"); }
-  function diffParts(target) {
-    const ms = Math.max(0, target.getTime() - Date.now());
-    const totalSeconds = Math.floor(ms / 1000);
-    const days = Math.floor(totalSeconds / 86400);
-    const hours = Math.floor((totalSeconds % 86400) / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-    return { days, hours, minutes, seconds, done: ms <= 0 };
-  }
-  function updateMode() {
-    const now = Date.now();
-    if (now < start.getTime()) return 'pre';
-    if (now <= end.getTime()) return 'live';
-    return 'post';
-  }
-
   let confettiTriggered = false;
 
-  function tick() {
-    const mode = updateMode();
-    if (mode === 'pre') {
-      label.textContent = '開始まで';
-      const d = diffParts(start);
-      dd.textContent = pad(d.days); hh.textContent = pad(d.hours); mm.textContent = pad(d.minutes); ss.textContent = pad(d.seconds);
-      ended.hidden = true;
-    } else if (mode === 'live') {
-      label.textContent = '終了まで';
-      const d = diffParts(end);
-      dd.textContent = pad(d.days); hh.textContent = pad(d.hours); mm.textContent = pad(d.minutes); ss.textContent = pad(d.seconds);
-      ended.hidden = true;
-    } else {
-      dd.textContent = hh.textContent = mm.textContent = ss.textContent = '00';
-      label.textContent = '';
-      ended.hidden = false;
+  // 定期的に紙吹雪を発射する関数
+  function startContinuousConfetti() {
+    if (typeof confetti === 'undefined') return;
 
-      // イベント終了後、紙吹雪を1度だけ実行
-      if (!confettiTriggered && typeof confetti !== 'undefined') {
-        confettiTriggered = true;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
-        // 連続して紙吹雪を降らせる
-        const duration = 5 * 1000; // 5秒間
-        const animationEnd = Date.now() + duration;
-        const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+    function randomInRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
 
-        function randomInRange(min, max) {
-          return Math.random() * (max - min) + min;
+    function fireConfetti() {
+      const duration = 3 * 1000; // 3秒間
+      const animationEnd = Date.now() + duration;
+
+      const interval = setInterval(function() {
+        const timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+          return clearInterval(interval);
         }
 
-        const interval = setInterval(function() {
-          const timeLeft = animationEnd - Date.now();
+        const particleCount = 50 * (timeLeft / duration);
 
-          if (timeLeft <= 0) {
-            return clearInterval(interval);
-          }
-
-          const particleCount = 50 * (timeLeft / duration);
-
-          // トップ3エリアから紙吹雪を発射
-          confetti(Object.assign({}, defaults, {
-            particleCount,
-            origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
-          }));
-          confetti(Object.assign({}, defaults, {
-            particleCount,
-            origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
-          }));
-        }, 250);
-      }
+        // 左右から紙吹雪を発射
+        confetti(Object.assign({}, defaults, {
+          particleCount,
+          origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
+        }));
+        confetti(Object.assign({}, defaults, {
+          particleCount,
+          origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+        }));
+      }, 250);
     }
+
+    // 最初の紙吹雪を即座に発射
+    fireConfetti();
+
+    // 10秒ごとに紙吹雪を発射
+    setInterval(fireConfetti, 10000);
   }
-  tick();
-  (function schedule(){ const next = 1000 - (Date.now() % 1000); setTimeout(() => { tick(); schedule(); }, next); })();
+
+  // イベント終了後、定期的に紙吹雪を発射
+  if (!confettiTriggered) {
+    confettiTriggered = true;
+    startContinuousConfetti();
+  }
 
   // ロゴのフォールバック（失敗時にテキスト表示）
   const logoImg = document.getElementById('logo');
@@ -206,38 +178,36 @@
       const data = await res.json();
       let rankings = [];
 
+      console.log('Rankings data loaded:', data);
+      console.log('Looking for key:', key);
+
       // 今日のデータを取得、なければ最新のデータを使用
       if (Array.isArray(data[key])) {
         rankings = data[key];
+        console.log('Found today\'s data:', rankings);
       } else {
         const keys = Object.keys(data || {}).sort();
         const last = keys[keys.length - 1];
+        console.log('Using latest data from:', last);
         if (last && Array.isArray(data[last])) {
           rankings = data[last];
-          note && (note.textContent = `ランキング集計日: ${last.replaceAll('-', '/')}`);
+          // note && (note.textContent = `ランキング集計日: ${last.replaceAll('-', '/')}`);
         }
       }
+
+      console.log('Final rankings:', rankings);
 
       if (rankings.length === 0) {
         note && (note.textContent = 'ランキングデータがありません');
         return;
-      } else if (!note.textContent) {
-        note && (note.textContent = `ランキング集計日: ${key.replaceAll('-', '/')}`);
       }
 
-      // 矢印と変動を計算する関数
-      function getChangeIndicator(rank, prevRank) {
-        if (prevRank === null || prevRank === undefined) {
-          return '<span class="ranking-change new">NEW</span>';
+      // 総いいね数を表示する関数（アイコン付き）
+      function getLikesDisplay(likes) {
+        if (likes === null || likes === undefined) {
+          return '<span class="total-likes">--</span>';
         }
-        const diff = prevRank - rank;
-        if (diff > 0) {
-          return `<span class="ranking-change up">↑</span>`;
-        } else if (diff < 0) {
-          return `<span class="ranking-change down">↓</span>`;
-        } else {
-          return '<span class="ranking-change same">←</span>';
-        }
+        return `<span class="total-likes">${likes} <svg class="like-icon-small" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg></span>`;
       }
 
       // トップ3の表示
@@ -274,17 +244,16 @@
         const p = document.createElement('p');
 
         if (names.length > 1) {
-          // 複数名の場合: 各名前に対応する矢印を表示
+          // 複数名の場合: 各名前に総いいね数を表示
           const nameParts = names.map((name, i) => {
-            const prevRank = prevRanks[i] !== undefined ? prevRanks[i] : null;
-            const indicator = getChangeIndicator(item.rank, prevRank);
-            return `<span class="name-with-indicator"><span class="name-part">${name}</span>${indicator}</span>`;
+            const likesDisplay = getLikesDisplay(item.likes);
+            return `<span class="name-with-indicator"><span class="name-part">${name}</span>${likesDisplay}</span>`;
           }).join('');
           p.innerHTML = `<div class="rank-name-multi">${nameParts}</div>`;
         } else {
-          // 単独の場合: 名前テキストと矢印を同じspanの中に入れる
-          const indicator = getChangeIndicator(item.rank, item.prevRank);
-          p.innerHTML = `<span class="rank-name"><span class="name-text">${item.name || ''}</span>${indicator}</span>`;
+          // 単独の場合: 名前テキストと総いいね数を表示
+          const likesDisplay = getLikesDisplay(item.likes);
+          p.innerHTML = `<span class="rank-name"><span class="name-text">${item.name || ''}</span>${likesDisplay}</span>`;
         }
 
         body.appendChild(rankLabel);
@@ -310,27 +279,26 @@
             : [];
 
           let nameHtml;
-          let indicatorHtml;
+          let likesHtml;
 
           if (names.length > 1) {
-            // 複数名の場合: 各名前に対応する矢印を表示
+            // 複数名の場合: 各名前に総いいね数を表示
             const nameParts = names.map((name, i) => {
-              const prevRank = prevRanks[i] !== undefined ? prevRanks[i] : null;
-              const indicator = getChangeIndicator(item.rank, prevRank);
-              return `<span class="name-with-indicator"><span class="name-part">${name}</span>${indicator}</span>`;
+              const likesDisplay = getLikesDisplay(item.likes);
+              return `<span class="name-with-indicator"><span class="name-part">${name}</span>${likesDisplay}</span>`;
             }).join('');
             nameHtml = `<div class="ranking-name-multi">${nameParts}</div>`;
-            indicatorHtml = ''; // 矢印は各名前の横に表示済み
+            likesHtml = ''; // いいね数は各名前の横に表示済み
           } else {
             // 単独の場合: 従来通り
             nameHtml = `<div class="ranking-name">${item.name || ''}</div>`;
-            indicatorHtml = getChangeIndicator(item.rank, item.prevRank);
+            likesHtml = getLikesDisplay(item.likes);
           }
 
           rankItem.innerHTML = `
             <div class="ranking-number">${item.rank}</div>
             ${nameHtml}
-            ${indicatorHtml}
+            ${likesHtml}
           `;
           rankings410Wrap.appendChild(rankItem);
         });
@@ -404,4 +372,33 @@
       try { console.error('Daily top3 posts error:', e); } catch {}
     }
   })();
+
+  // 総投稿数・総いいね数の表示
+  const totalPostsEl = document.getElementById('total-posts');
+  const totalLikesEl = document.getElementById('total-likes');
+
+  // 実際の数値を表示
+  if (totalPostsEl) totalPostsEl.textContent = '112';
+  if (totalLikesEl) totalLikesEl.textContent = '1,855';
 })();
+
+// 表彰状ダウンロード機能
+function downloadCertificate(imageUrl, filename) {
+  fetch(imageUrl)
+    .then(response => response.blob())
+    .then(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    })
+    .catch(error => {
+      console.error('ダウンロードエラー:', error);
+      alert('ダウンロードに失敗しました。');
+    });
+}

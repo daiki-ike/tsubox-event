@@ -98,6 +98,33 @@ body {
 .section.alt { background: rgba(255,255,255,0.08); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .section h2 { font-size: clamp(20px, 3.6vw, 28px); margin: 0 0 14px; }
 .section p { line-height: 1.8; margin: 0.4rem 0; }
+.section-subtitle {
+  font-size: clamp(14px, 3vw, 18px);
+  color: var(--muted);
+  text-align: center;
+  margin: 8px 0 24px;
+}
+
+.section-header-with-subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.section-subtitle-inline {
+  font-size: clamp(12px, 2.5vw, 16px);
+  color: var(--muted);
+}
+
+@media (max-width: 640px) {
+  .section-header-with-subtitle {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
 .steps { margin: 8px 0; padding-left: 1.1rem; }
 .steps li { margin: 8px 0; }
 .note { color: var(--muted); font-size: 0.95rem; }
@@ -207,21 +234,21 @@ body {
 
 /* Different heights for each podium */
 #top3 .prize:nth-child(1)::after {
-  height: 220px;
+  height: 260px;
   background: linear-gradient(180deg, rgba(255,215,0,0.25), rgba(255,215,0,0.08));
   border-color: rgba(255,215,0,0.4);
   box-shadow: 0 8px 32px rgba(255,215,0,0.3), inset 0 2px 8px rgba(255,255,255,0.2);
 }
 
 #top3 .prize:nth-child(2)::after {
-  height: 170px;
+  height: 200px;
   background: linear-gradient(180deg, rgba(192,192,192,0.25), rgba(192,192,192,0.08));
   border-color: rgba(192,192,192,0.4);
   box-shadow: 0 8px 28px rgba(192,192,192,0.25), inset 0 2px 8px rgba(255,255,255,0.15);
 }
 
 #top3 .prize:nth-child(3)::after {
-  height: 130px;
+  height: 150px;
   background: linear-gradient(180deg, rgba(205,127,50,0.25), rgba(205,127,50,0.08));
   border-color: rgba(205,127,50,0.4);
   box-shadow: 0 8px 24px rgba(205,127,50,0.25), inset 0 2px 8px rgba(255,255,255,0.1);
@@ -251,60 +278,62 @@ body {
 
 #top3 .rank-label {
   display: block;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 900;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   text-shadow: 0 4px 12px rgba(0,0,0,0.8);
+  line-height: 1;
+  color: #fff;
 }
 
 #top3 .prize:nth-child(1) .rank-label {
-  background: linear-gradient(135deg, #ffd700, #ffed4e);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 12px rgba(255,215,0,0.8));
-  margin-top: 16px;
+  color: #ffd700;
+  text-shadow: 0 0 20px rgba(255,215,0,0.9), 0 2px 8px rgba(0,0,0,0.8);
+  filter: drop-shadow(0 0 8px rgba(255,215,0,0.6));
 }
 
 #top3 .prize:nth-child(2) .rank-label {
-  background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 10px rgba(192,192,192,0.6));
+  color: #e8e8e8;
+  text-shadow: 0 0 16px rgba(192,192,192,0.8), 0 2px 8px rgba(0,0,0,0.8);
+  filter: drop-shadow(0 0 6px rgba(192,192,192,0.5));
 }
 
 #top3 .prize:nth-child(3) .rank-label {
-  background: linear-gradient(135deg, #cd7f32, #e8a75c);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 8px rgba(205,127,50,0.6));
-  margin-top: 16px;
+  color: #e8a75c;
+  text-shadow: 0 0 14px rgba(205,127,50,0.8), 0 2px 8px rgba(0,0,0,0.8);
+  filter: drop-shadow(0 0 6px rgba(205,127,50,0.5));
 }
 
 #top3 .rank-name {
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
   font-size: 1.4rem;
   font-weight: 700;
   color: #fff;
 }
 
 #top3 .rank-name .name-text {
-  display: inline;
+  display: block;
+  white-space: nowrap;
+  text-align: center;
 }
 
 /* Position adjustments for 2nd and 3rd place text */
 /* Calculate: medal height (80px + 12px margin) + podium center */
+#top3 .prize:nth-child(1) .prize__body {
+  top: 200px;
+  transform: translateY(-50%);
+}
+
 #top3 .prize:nth-child(2) .prize__body {
-  top: 177px;
+  top: 168px;
   transform: translateY(-50%);
 }
 
 #top3 .prize:nth-child(3) .prize__body {
-  top: 157px;
+  top: 143px;
   transform: translateY(-50%);
 }
 
@@ -393,26 +422,112 @@ body {
   #top3 .prize { min-width: 100px; max-width: 140px; }
   #top3 .medal { width: 60px; height: 60px; margin-bottom: 8px; }
   #top3 .medal__icon { width: 30px; height: 30px; }
-  #top3 .prize:nth-child(1)::after { height: 140px; }
-  #top3 .prize:nth-child(2)::after { height: 110px; }
-  #top3 .prize:nth-child(3)::after { height: 85px; }
-  #top3 .rank-label { font-size: 1.5rem !important; }
-  #top3 .prize__body { padding: 6px 2px; }
-  #top3 .rank-name { font-size: 0.85rem !important; }
-  #top3 .rank-name .name-text { font-size: 0.85rem !important; }
+  #top3 .prize:nth-child(1)::after { height: 170px; }
+  #top3 .prize:nth-child(2)::after { height: 130px; }
+  #top3 .prize:nth-child(3)::after { height: 100px; }
+  #top3 .rank-label { font-size: 2rem !important; margin-bottom: 8px !important; }
+  #top3 .prize__body { padding: 4px; width: 100%; overflow: visible; }
+  #top3 .rank-name .name-text {
+    font-size: 0.85rem !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+  }
   #top3 .rank-name-multi { gap: 1px !important; }
   #top3 .rank-name-multi .name-part { font-size: 0.85rem !important; line-height: 1.2 !important; }
   #top3 .rank-name-multi .name-with-indicator .name-part { font-size: 0.85rem !important; }
   #top3 .ranking-change { font-size: 0.85rem !important; }
 
   /* Adjust text position for mobile - medal height (60px + 8px margin) + podium center */
+  #top3 .prize:nth-child(1) .prize__body {
+    top: 145px !important;
+    transform: translateY(-50%);
+  }
+
   #top3 .prize:nth-child(2) .prize__body {
-    top: 123px;
+    top: 128px !important;
+    transform: translateY(-50%);
   }
 
   #top3 .prize:nth-child(3) .prize__body {
-    top: 110px;
+    top: 118px !important;
+    transform: translateY(-50%);
   }
+
+  #top3 .rank-name {
+    font-size: 0.75rem !important;
+    gap: 2px !important;
+  }
+
+  #top3 .rank-label {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* ===== トップ3の賞状セクション ===== */
+.top3-certificates {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.top3-certificate-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.top3-certificate-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(34, 193, 241, 0.2);
+}
+
+.certificate-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.top3-certificate-item .message-rank {
+  font-size: clamp(18px, 4vw, 24px);
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.top3-certificate-item .message-name {
+  font-size: clamp(20px, 4vw, 26px);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.top3-certificate-item .message-text {
+  font-size: clamp(14px, 3vw, 16px);
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0 0 24px 0;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  text-align: justify;
+  text-justify: inter-character;
+}
+
+.top3-certificate-item .certificate-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  margin-bottom: 16px;
+}
+
+.top3-certificate-item .download-btn {
+  width: 100%;
+  max-width: 100%;
 }
 
 /* Notice (disclaimer) */
@@ -750,5 +865,342 @@ body {
 @media (max-width: 768px) {
   .daily-posts-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ===== 感謝メッセージ ===== */
+.thank-you-message {
+  font-size: clamp(14px, 3vw, 20px);
+  font-weight: 600;
+  color: var(--primary);
+  margin: 16px 0 32px;
+  text-align: left;
+  text-shadow: 0 2px 8px rgba(34, 193, 241, 0.5);
+  line-height: 1.6;
+  max-width: 100%;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  padding: 0 16px;
+}
+
+/* ===== イベント統計 ===== */
+.event-stats {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: center;
+  margin: 32px 0;
+  padding: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.stat-number {
+  font-size: clamp(32px, 6vw, 48px);
+  font-weight: 700;
+  color: var(--primary);
+  text-shadow: 0 2px 8px rgba(34, 193, 241, 0.5);
+}
+
+.stat-label {
+  font-size: clamp(14px, 3vw, 18px);
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* ===== 表彰状セクション ===== */
+.certificates-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.certificate-item {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.certificate-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(34, 193, 241, 0.3);
+}
+
+.certificate-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.download-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--primary);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.download-btn:hover {
+  background: var(--primary-600);
+  transform: scale(1.02);
+}
+
+.download-btn:active {
+  transform: scale(0.98);
+}
+
+.download-btn svg {
+  flex-shrink: 0;
+}
+
+/* ===== 総いいね数の表示 ===== */
+.total-likes {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.9em;
+  margin-left: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.like-icon-small {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+/* ===== 4位以降の個別メッセージ ===== */
+.individual-messages {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.individual-message-item {
+  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.individual-message-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(34, 193, 241, 0.2);
+}
+
+.message-rank {
+  font-size: clamp(14px, 3vw, 16px);
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.message-name {
+  font-size: clamp(18px, 4vw, 22px);
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.message-text {
+  font-size: clamp(14px, 3vw, 16px);
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.message-header-with-likes {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.message-likes {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: clamp(14px, 3vw, 16px);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.general-thanks {
+  margin-top: 24px;
+  padding: 24px 32px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  text-align: left;
+}
+
+.general-thanks p {
+  margin: 8px 0;
+  font-size: clamp(14px, 3vw, 18px);
+  color: var(--muted);
+  line-height: 1.6;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.general-thanks p:first-child {
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ===== コメントで盛り上げてくれた人 ===== */
+.commenters-list {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.commenter-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  flex: 1;
+  min-width: 200px;
+  max-width: 280px;
+}
+
+.commenter-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(34, 193, 241, 0.2);
+}
+
+.commenter-rank {
+  font-size: clamp(16px, 4vw, 20px);
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.commenter-name {
+  font-size: clamp(18px, 4vw, 22px);
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
+}
+
+.commenter-count {
+  font-size: clamp(14px, 3vw, 16px);
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ===== 表彰・特典のお知らせ ===== */
+.prize-announcement {
+  font-size: clamp(18px, 4vw, 24px);
+  font-weight: 600;
+  color: var(--primary);
+  text-align: center;
+  padding: 32px 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(34, 193, 241, 0.5);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  line-height: 1.6;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .event-stats {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .certificates-grid {
+    gap: 24px;
+  }
+
+  .certificate-item {
+    padding: 16px;
+  }
+
+  .message-rank {
+    font-size: 14px;
+  }
+
+  .like-icon-small {
+    width: 14px;
+    height: 14px;
+  }
+
+  .message-name {
+    font-size: 18px;
+  }
+
+  .message-text {
+    font-size: 14px;
+  }
+
+  .download-btn {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+
+  .top3-certificate-item {
+    padding: 16px;
+  }
+
+  .prize-announcement {
+    font-size: 16px;
+    padding: 20px 16px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .general-thanks {
+    padding: 16px 20px;
   }
 }

@@ -31,7 +31,7 @@
     <meta name="twitter:image" content="https://daiki-ike.github.io/tsubox-event/assets/ogp-facebook.png?v=13" />
 
     <link rel="icon" href="assets/logo.png" />
-    <link rel="stylesheet" href="styles.css?v=71" />
+    <link rel="stylesheet" href="styles.css?v=1" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
   </head>
   <body>
@@ -43,92 +43,164 @@
         </div>
         <h1 class="title">Facebook いいねチャレンジ</h1>
         <p class="subtitle">開催期間 10/15 – 10/31 <span id="event-year"></span></p>
+        <p class="thank-you-message">入賞のみんな、本当におめでとうございます！投稿も、リアクションも、心の中の「いいね」も、全部ちゃんと届いてました。参加してくれたみんな、ありがとう！</p>
 
-        <!-- 現在のトップ3（ロゴ直下） -->
+        <!-- トップ3（ロゴ直下） -->
         <section class="section" id="top3">
           <div class="container">
-            <h2>現在のトップ3</h2>
+            <h2>最終順位</h2>
             <div class="prizes" id="top3-list" aria-live="polite"></div>
             <p class="note" id="top3-note"></p>
+
+            <!-- 1位～3位の賞状とメッセージ -->
+            <div class="top3-certificates">
+              <!-- 1位 -->
+              <div class="top3-certificate-item">
+                <div class="certificate-header">
+                  <div class="message-rank">1位</div>
+                  <div class="message-name">齋藤大輝</div>
+                </div>
+                <p class="message-text">毎日コツコツと先輩の背中を追いかけた結果が、みんなのいいねを引き出した！その素直さと愚直な継続力に、心から拍手を送ります。おめでとう！あなたがキングだ！！</p>
+                <img src="assets/certificate-1st.png" alt="1位 表彰状" class="certificate-image" />
+                <button class="download-btn" onclick="downloadCertificate('assets/certificate-1st.png', '表彰状_1位.png')">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                  </svg>
+                  表彰状をダウンロード
+                </button>
+              </div>
+
+              <!-- 2位 -->
+              <div class="top3-certificate-item">
+                <div class="certificate-header">
+                  <div class="message-rank">2位</div>
+                  <div class="message-name">河野竜馬</div>
+                </div>
+                <p class="message-text">あなたが立ち上がり、声を上げ、社内を一気に巻き込んでくれた。このチャレンジがここまで熱くなったのは、間違いなくあなたのおかげです。その影響力に最大の敬意とありがとうを。拍手を込めて表彰します。</p>
+                <img src="assets/certificate-2nd.png" alt="2位 表彰状" class="certificate-image" />
+                <button class="download-btn" onclick="downloadCertificate('assets/certificate-2nd.png', '表彰状_2位.png')">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                  </svg>
+                  表彰状をダウンロード
+                </button>
+              </div>
+
+              <!-- 3位 -->
+              <div class="top3-certificate-item">
+                <div class="certificate-header">
+                  <div class="message-rank">3位</div>
+                  <div class="message-name">瀬和日莉</div>
+                </div>
+                <p class="message-text">あなたは前に出る人を支えながら、熱をつなぎ続けてくれました。その"やり切る力"が、私たちに諦めず続けることの価値を示してくれました。本当にありがとう。敬意と拍手を込めて表彰します。</p>
+                <img src="assets/certificate-3rd.png" alt="3位 表彰状" class="certificate-image" />
+                <button class="download-btn" onclick="downloadCertificate('assets/certificate-3rd.png', '表彰状_3位.png')">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                  </svg>
+                  表彰状をダウンロード
+                </button>
+              </div>
+            </div>
           </div>
         </section>
 
-        <!-- 4位～10位のランキング -->
-        <section class="section" id="rankings-4-10">
-          <div class="container">
-            <h2>4位～10位</h2>
-            <div class="rankings-list" id="rankings-4-10-list" aria-live="polite"></div>
+        <!-- イベント統計 -->
+        <section class="event-stats">
+          <div class="stat-item">
+            <span class="stat-number" id="total-posts">--</span>
+            <span class="stat-label">総投稿数</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="total-likes">--</span>
+            <span class="stat-label">総いいね数</span>
           </div>
         </section>
-
-        <section class="countdown" aria-live="polite">
-          <p class="countdown__label" id="countdown-label">開始まで</p>
-          <div class="countdown__grid" id="countdown">
-            <div class="unit"><span id="dd">00</span><small>日</small></div>
-            <div class="unit"><span id="hh">00</span><small>時間</small></div>
-            <div class="unit"><span id="mm">00</span><small>分</small></div>
-            <div class="unit"><span id="ss">00</span><small>秒</small></div>
-          </div>
-          <p class="countdown__ended" id="ended-message" hidden>イベントは終了しました。たくさんのご参加ありがとうございました。</p>
-        </section>
-
-        <div class="cta">
-          <a class="btn btn--primary" href="https://www.facebook.com/" target="_blank" rel="noopener">Facebookで投稿する</a>
-          <a class="btn" href="#how">参加方法を見る</a>
-        </div>
       </div>
     </header>
 
     <main>
-      <!-- 会社動画ギャラリーへのリンクカード -->
-      <a class="link-card" href="https://daiki-ike.github.io/company-video-gallery/" target="_blank" rel="noopener">
-        <span>
-          <svg class="like-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/>
-          </svg>
-          もうひとつの・・・いいねチャレンジ！▶
-        </span>
-      </a>
-
-      <section class="section alt" id="daily-top3-posts">
+      <!-- 表彰状セクション -->
+      <section class="section alt" id="certificates">
         <div class="container">
-          <h2>昨日のトップ3投稿</h2>
-          <p class="note" id="daily-top3-note"></p>
-          <div class="daily-posts-grid" id="daily-posts-grid">
-            <!-- 投稿はJavaScriptで動的に読み込まれます -->
+          <h2>4位〜10位のみなさんへ、敬意を込めて</h2>
+          <!-- 4位以降へのメッセージ -->
+          <div class="individual-messages" style="margin-top: 48px;">
+            <div class="individual-message-item">
+              <div class="message-rank">4位　226 <svg class="like-icon-small" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg></div>
+              <div class="message-name">中井隆太</div>
+              <p class="message-text">関西に火をつけ、熱を一気に広げてくれた立役者！あなたのエネルギーが、西日本を動かしました。感謝！</p>
+            </div>
+            <div class="individual-message-item">
+              <div class="message-rank">5位　164 <svg class="like-icon-small" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg></div>
+              <div class="message-name">玉置涼太</div>
+              <p class="message-text">淡々としていながらも確かな存在感。落ち着いた熱をありがとう！距離を超えてつながりを見せてくれた、その発信に敬意を送ります。</p>
+            </div>
+            <div class="individual-message-item">
+              <div class="message-rank">6位　94 <svg class="like-icon-small" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg></div>
+              <div class="message-name">秋田美帆</div>
+              <p class="message-text">西日本を大いに盛り上げてくれてありがとう！あなたの背中は、確かに後輩たちを動かしていました。</p>
+            </div>
+            <div class="individual-message-item">
+              <div class="message-rank">7位　76 <svg class="like-icon-small" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg></div>
+              <div class="message-name">長濱由璃</div>
+              <p class="message-text">ラストスパートの追い上げ、本当に見事でした。あの勢いにワクワクさせてもらいました。ありがとう！</p>
+            </div>
+            <div class="individual-message-item">
+              <div class="message-rank">8位　64 <svg class="like-icon-small" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg></div>
+              <div class="message-name">藤田真理菜</div>
+              <p class="message-text">ひょうひょうとした空気感の中にある、ぶれない安心感。あの落ち着き、本当に心強かったです。ありがとう！</p>
+            </div>
+            <div class="individual-message-item">
+              <div class="message-rank">9位　60 <svg class="like-icon-small" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg></div>
+              <div class="message-name">白川哲平</div>
+              <p class="message-text">周囲が静かな空気の中で、一歩を踏み出してくれたことに心から感謝します。あの投稿には、しっかり熱がありました。ほんとうにありがとう。</p>
+            </div>
+            <div class="individual-message-item">
+              <div class="message-rank">10位　59 <svg class="like-icon-small" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg></div>
+              <div class="message-name">竹内学</div>
+              <p class="message-text">少ない投稿回数でもしっかり影響力を残したのはさすが！あなたの言葉には、想像以上の力があります。</p>
+            </div>
+            <div class="general-thanks">
+              <p>11位以下の皆さまも、素晴らしい投稿をありがとうございました！</p>
+              <p>今後も引き続き、皆さまの活躍を応援しています！</p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section" id="how">
+
+      <!-- コメントで盛り上げてくれた人 -->
+      <section class="section" id="top-commenters">
         <div class="container">
-          <h2>参加方法</h2>
-          <ol class="steps">
-            <li>期間中（10/15〜10/31）に、Facebookで仕事や取り組みについて投稿する。</li>
-            <li>おすすめハッシュタグ <code>#tsuboxWork</code> を付ける（任意）。</li>
-            <li>同僚にシェアして「いいね」を集めよう。</li>
-          </ol>
-          <p class="note">※ 投稿内容には社外秘・個人情報の取り扱いにご注意ください。</p>
+          <div class="section-header-with-subtitle">
+            <h2>コメントで盛り上げてくれた人</h2>
+            <span class="section-subtitle-inline">言葉で熱を足してくれた3人、本当にありがとう！</span>
+          </div>
+          <div class="commenters-list">
+            <div class="commenter-item">
+              <div class="commenter-rank">1位</div>
+              <div class="commenter-name">樽本光恵</div>
+              <div class="commenter-count">5回</div>
+            </div>
+            <div class="commenter-item">
+              <div class="commenter-rank">1位</div>
+              <div class="commenter-name">中村彩花</div>
+              <div class="commenter-count">5回</div>
+            </div>
+            <div class="commenter-item">
+              <div class="commenter-rank">3位</div>
+              <div class="commenter-name">竹内学</div>
+              <div class="commenter-count">4回</div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="section" id="prize">
+      <section class="section alt" id="prize">
         <div class="container">
           <h2>表彰・特典</h2>
-          <div class="prizes">
-            <div class="prize">
-              <div class="medal gold" aria-label="1位"><svg class="medal__icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h10l-2 6H9L7 2zm5 7a6 6 0 1 1 0 12a6 6 0 0 1 0-12zm0 2.3l1.38 2.8l3.1.45l-2.24 2.17l.53 3.08L12 18.2l-2.77 1.46l.53-3.08L7.5 12.55l3.1-.45L12 11.3z"/></svg></div>
-              <div class="prize__body"><h3>1位</h3><p>ボーナス（社長のポケットマネーから…）</p></div>
-            </div>
-            <div class="prize">
-              <div class="medal silver" aria-label="2位"><svg class="medal__icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h10l-2 6H9L7 2zm5 7a6 6 0 1 1 0 12a6 6 0 0 1 0-12zm0 2.3l1.38 2.8l3.1.45l-2.24 2.17l.53 3.08L12 18.2l-2.77 1.46l.53-3.08L7.5 12.55l3.1-.45L12 11.3z"/></svg></div>
-              <div class="prize__body"><h3>2位</h3><p>ボーナス（社長のポケットマネーから）</p></div>
-            </div>
-            <div class="prize">
-              <div class="medal bronze" aria-label="3位"><svg class="medal__icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h10l-2 6H9L7 2zm5 7a6 6 0 1 1 0 12a6 6 0 0 1 0-12zm0 2.3l1.38 2.8l3.1.45l-2.24 2.17l.53 3.08L12 18.2l-2.77 1.46l.53-3.08L7.5 12.55l3.1-.45L12 11.3z"/></svg></div>
-              <div class="prize__body"><h3>3位</h3><p>ボーナス（社長のポケットマネーから）</p></div>
-            </div>
-          </div>
+          <p class="prize-announcement">表彰特典は社長から別途発表されます！</p>
         </div>
       </section>
 
@@ -159,6 +231,6 @@
       </div>
     </footer>
 
-    <script src="script.js?v=71"></script>
+    <script src="script.js?v=1"></script>
   </body>
 </html>
