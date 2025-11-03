@@ -173,7 +173,7 @@
     const key = `${jst.getUTCFullYear()}-${String(jst.getUTCMonth()+1).padStart(2,'0')}-${String(jst.getUTCDate()).padStart(2,'0')}`;
 
     try {
-      const res = await fetch('rankings.json', { cache: 'no-store' });
+      const res = await fetch('rankings.json?v=999', { cache: 'no-store' });
       if (!res.ok) throw new Error('rankings.json not found');
       const data = await res.json();
       let rankings = [];
