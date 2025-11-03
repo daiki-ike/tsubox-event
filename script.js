@@ -168,9 +168,8 @@
     const note = document.getElementById('top3-note');
     if (!top3Wrap) return;
 
-    const nowUtc = Date.now();
-    const jst = new Date(nowUtc + 9 * 60 * 60 * 1000);
-    const key = `${jst.getUTCFullYear()}-${String(jst.getUTCMonth()+1).padStart(2,'0')}-${String(jst.getUTCDate()).padStart(2,'0')}`;
+    // イベント最終日のデータを表示
+    const key = '2025-10-31';
 
     try {
       const res = await fetch('rankings.json?v=999', { cache: 'no-store' });
